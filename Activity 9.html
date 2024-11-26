@@ -1,0 +1,93 @@
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+            nameInput.addEventListener('input', validateName);
+            emailInput.addEventListener('input', validateEmail);
+            passwordInput.addEventListener('input', validatePassword);
+
+            function validateName() {
+                const name = nameInput.value;
+                const nameMessage = document.getElementById('nameMessage');
+                if (name.length >= 3) {
+                    nameInput.classList.remove('border-red-500');
+                    nameInput.classList.add('border-green-500');
+                    nameMessage.textContent = 'Looks good!';
+                    nameMessage.classList.remove('text-red-500');
+                    nameMessage.classList.add('text-green-500');
+                } else {
+                    nameInput.classList.remove('border-green-500');
+                    nameInput.classList.add('border-red-500');
+                    nameMessage.textContent = 'Name must be at least 3 characters long.';
+                    nameMessage.classList.remove('text-green-500');
+                    nameMessage.classList.add('text-red-500');
+                }
+            }
+
+            function validateEmail() {
+                const email = emailInput.value;
+                const emailMessage = document.getElementById('emailMessage');
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailPattern.test(email)) {
+                    emailInput.classList.remove('border-red-500');
+                    emailInput.classList.add('border-green-500');
+                    emailMessage.textContent = 'Valid email!';
+                    emailMessage.classList.remove('text-red-500');
+                    emailMessage.classList.add('text-green-500');
+                } else {
+                    emailInput.classList.remove('border-green-500');
+                    emailInput.classList.add('border-red-500');
+                    emailMessage.textContent = 'Please enter a valid email address.';
+                    emailMessage.classList.remove('text-green-500');
+                    emailMessage.classList.add('text-red-500');
+                }
+            }
+
+            function validatePassword() {
+                const password = passwordInput.value;
+                const passwordMessage = document.getElementById('passwordMessage');
+                if (password.length >= 6) {
+                    passwordInput.classList.remove('border-red-500');
+                    passwordInput.classList.add('border-green-500');
+                    passwordMessage.textContent = 'Strong password!';
+                    passwordMessage.classList.remove('text-red-500');
+                    passwordMessage.classList.add('text-green-500');
+                } else {
+                    passwordInput.classList.remove('border-green-500');
+                    passwordInput.classList.add('border-red-500');
+                    passwordMessage.textContent = 'Password must be at least 6 characters long.';
+                    passwordMessage.classList.remove('text-green-500');
+                    passwordMessage.classList.add('text-red-500');
+                }
+            }
+        });
+    </script>
+</head>
+<body class="p-8">
+    <form class="mt-8">
+        <div class="mb-4 flex items-center">
+            <label for="name" class="w-24 text-lg"><strong>Name:</strong></label>
+            <input type="text" id="name" class="border-2 p-2 w-64" />
+            <span id="nameMessage" class="ml-2"></span>
+        </div>
+        <div class="mb-4 flex items-center">
+            <label for="email" class="w-24 text-lg"><strong>Email:</strong></label>
+            <input type="text" id="email" class="border-2 p-2 w-64" />
+            <span id="emailMessage" class="ml-2"></span>
+        </div>
+        <div class="mb-4 flex items-center">
+            <label for="password" class="w-24 text-lg"><strong>Password:</strong></label>
+            <input type="password" id="password" class="border-2 p-2 w-64" />
+            <i class="fas fa-key ml-2"></i>
+            <span id="passwordMessage" class="ml-2"></span>
+        </div>
+        <button type="button" class="border p-2">Submit</button>
+    </form>
+</body>
+</html>
